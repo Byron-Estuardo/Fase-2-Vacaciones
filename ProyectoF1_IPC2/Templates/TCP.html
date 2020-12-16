@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{% static 'css/hola.css' %}" />
+    <title>Transacciones entre Cuentas</title>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="dropdown">
+                <button class="dropbtn">
+                    Transacciónes
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="http://127.0.0.1:8000/Transacciones/EntreCuentas/">Transacciónes entre Cuentas Propias</a>
+                    <a href="http://127.0.0.1:8000/Transacciones/Terceros/">Transacciónes a Cuentas de Terceros</a>
+                </div>
+            </div>
+            <a href="http://127.0.0.1:8000/Pre-Autorizacion/">Pre-Autorización de Cheques</a>
+            <div class="dropdown">
+                <button class="dropbtn">
+                    Pagos
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="http://127.0.0.1:8000/Pagos/Servicios/">Pago de Servicios</a>
+                    <a href="http://127.0.0.1:8000/Pagos/PlantillasyProveedores/">Pago de Plantillas</a>
+                </div>
+            </div>
+            <a href="http://127.0.0.1:8000/Solicitud-Prestamos/">Solicitud de Prestamos</a>
+            <div class="dropdown">
+                <button class="dropbtn us">
+                    Usuario
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="http://127.0.0.1:8000/Usuario/">Estado de Cuenta</a>
+                    <a href="http://127.0.0.1:8000/Usuario/Suspender/">Suspender Cuenta</a>
+                    <a href="http://127.0.0.1:8000/Usuario/Reactivar/">Reactivar Cuenta</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="grid-container" style="grid-template-columns: 20% 60% 20%;">
+        <div class="item2">
+
+        </div>
+        <div class="item1">
+            <div class="box">
+                <form>
+                    <span id="hi" class="text-center" style="padding-bottom:40px">Transacción entre Cuentas Propias</span>
+
+                    <div id="hi" class="input-container">
+                        <label id="hi">Cuenta Origen</label>
+                        <br />
+                        <select style="width:100%; height:35px ; font-size:16px ;background-color:transparent; color:maroon; content:'';border:none; border-bottom: 1px solid rgb(231, 76, 60);" id="sele">
+                            <option value="0">
+                                Cuenta 1
+                            </option>
+                            <option value="1">
+                                Cuenta 2
+                            </option>
+                            <option value="2">
+                                Cuenta 3
+                            </option>
+                        </select>
+                    </div>
+                    <div id="hi" class="input-container">
+                        <label id="hi">Cuenta Destino</label>
+                        <br />
+                        <select style="width:100%; height:35px ; font-size:16px ;background-color:transparent; color:maroon; content:'';border:none; border-bottom: 1px solid rgb(231, 76, 60);" id="sele">
+                            <option value="0">
+                                Cuenta 1
+                            </option>
+                            <option value="1">
+                                Cuenta 2
+                            </option>
+                            <option value="2">
+                                Cuenta 3
+                            </option>
+                        </select>
+                    </div>
+                    <div id="hi" class="input-container">
+                        <input id="hi" type="number" required="" />
+                        <label id="hi">Monto</label>
+                    </div>
+                    <button id="hi" type="button" class="btn">Realizar Tranferencia</button>
+                </form>
+            </div>
+        </div>
+        <div class="item2">
+
+        </div>
+    </div>
+
+</body>
+</html>

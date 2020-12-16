@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="{% static 'css/Primeras.css' %}" />
+    <title>Login</title>
+</head>
+<body>
+    <div class="box">
+        <form>
+            <span class="text-center">Inicio de Sesión</span>
+            <div class="input-container">
+                <input type="text" required="" />
+                <label>Numero de Cuenta</label>
+            </div>
+            <div class="input-container">
+                <input type="password" required="" />
+                <label>Clave de Acceso</label>
+            </div>
+            <div class="input-container">
+                <a href="http://127.0.0.1:8000/Registro/" style="color:blue">No posee una Cuenta?</a>
+            </div>
+            <button type="button" class="btn">Ingresar</button>
+        </form>
+    </div>
+
+</body>
+</html>

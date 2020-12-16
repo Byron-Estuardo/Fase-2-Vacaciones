@@ -1,0 +1,29 @@
+﻿{% extends 'Inicio.html' %}
+{% block content %}
+<div class="navbar">
+    <div class="dropdown">
+        <button class="dropbtn">
+            Transacciones
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="#">Transacciones entre Cuentas Propias</a>
+            <a href="#">Transacciones a Cuentas de Terceros</a>
+        </div>
+    </div>
+    <a href="#home">Pre-Autorización de Cheques</a>
+    <div class="dropdown">
+        <button class="dropbtn">
+            Pagos
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="#">Pago de Servicios</a>
+            <a href="#">Pago de Plantillas</a>
+            <a href="#">Pago a Proveedores</a>
+        </div>
+    </div>
+    <a href="#home">Solicitud de Prestamos</a>
+    <a href="#home" class="us" id="Usuario">Usuario</a>
+</div>
+{% endblock %}

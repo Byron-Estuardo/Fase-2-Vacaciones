@@ -1,0 +1,266 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{% static 'css/hola.css' %}" />
+    <title>Transacciones entre Cuentas</title>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="dropdown">
+                <button class="dropbtn">
+                    Transacciónes
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="http://127.0.0.1:8000/Transacciones/EntreCuentas/">Transacciónes entre Cuentas Propias</a>
+                    <a href="http://127.0.0.1:8000/Transacciones/Terceros/">Transacciónes a Cuentas de Terceros</a>
+                </div>
+            </div>
+            <a href="http://127.0.0.1:8000/Pre-Autorizacion/">Pre-Autorización de Cheques</a>
+            <div class="dropdown">
+                <button class="dropbtn">
+                    Pagos
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="http://127.0.0.1:8000/Pagos/Servicios/">Pago de Servicios</a>
+                    <a href="http://127.0.0.1:8000/Pagos/PlantillasyProveedores/">Pago de Plantillas</a>
+                </div>
+            </div>
+            <a href="http://127.0.0.1:8000/Solicitud-Prestamos/">Solicitud de Prestamos</a>
+            <div class="dropdown">
+                <button class="dropbtn" id="Usuario">
+                    Usuario
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="http://127.0.0.1:8000/Usuario/">Estado de Cuenta</a>
+                    <a href="http://127.0.0.1:8000/Usuario/Suspender/">Suspender Cuenta</a>
+                    <a href="http://127.0.0.1:8000/Usuario/Reactivar/">Reactivar Cuenta</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="grid-container" style="grid-template-columns: 50% 50%;">
+        <div class="item1">
+            <article class="bz" style="background-color:white; padding-right:2px;">
+                <h2>Depósitos</h2>
+                <table border="1" style="border-color:black; border-style:groove;">
+                    <tr>
+                        <td><strong>Nombre</strong></td>
+                        <td><strong>Numero de Cuenta</strong></td>
+                        <td><strong>Monto</strong></td>
+                    </tr>
+
+                    <tr>
+                        <td>Lucia</td>
+                        <td>13213213</td>
+                        <td>Q 30.2</td>
+
+
+                    </tr>
+
+                    <tr>
+                        <td>Byron</td>
+                        <td>33665411</td>
+                        <td>Q 6985.36</td>
+
+
+                    </tr>
+
+                    <tr>
+                        <td>Jose</td>
+                        <td>00020122</td>
+                        <td>Q 200.3</td>
+
+
+                    </tr>
+                </table>    
+            </article>
+        </div>
+        <div class="item1">
+            <article class="bz" style="background-color:white; padding-left:2px;">
+                <h2>Retiros</h2>
+                <table border="1" style="border-color:black; border-style:groove;">
+                    <tr>
+                        <td><strong>Nombre</strong></td>
+                        <td><strong>Numero de Cuenta</strong></td>
+                        <td><strong>Monto</strong></td>
+                    </tr>
+
+                    <tr>
+                        <td>Lucia</td>
+                        <td>13213213</td>
+                        <td>Q 30.2</td>
+
+
+                    </tr>
+
+                    <tr>
+                        <td>Byron</td>
+                        <td>33665411</td>
+                        <td>Q 6985.36</td>
+
+
+                    </tr>
+
+                    <tr>
+                        <td>Jose</td>
+                        <td>00020122</td>
+                        <td>Q 200.3</td>
+
+
+                    </tr>
+                </table>   
+            </article>
+        </div>
+        <div class="item1">
+            <article class="bz" style="background-color:white; padding-right:2px;">
+                <h2>Cambio de Cheques</h2>
+                <table border="1" style="border-color:black; border-style:groove;">
+                    <tr>
+                        <td><strong>Nombre</strong></td>
+                        <td><strong>Numero de Cuenta</strong></td>
+                        <td><strong>Monto</strong></td>
+                    </tr>
+
+                    <tr>
+                        <td>Lucia</td>
+                        <td>13213213</td>
+                        <td>Q 30.2</td>
+
+
+                    </tr>
+
+                    <tr>
+                        <td>Byron</td>
+                        <td>33665411</td>
+                        <td>Q 6985.36</td>
+
+
+                    </tr>
+
+                    <tr>
+                        <td>Jose</td>
+                        <td>00020122</td>
+                        <td>Q 200.3</td>
+
+
+                    </tr>
+                </table>    
+            </article>
+        </div>
+        <div class="item1">
+            <article class="bz" style="background-color:white; padding-left:2px;">
+                <h2>Transferencias</h2>
+                <table border="1" style="border-color:black; border-style:groove;">
+                    <tr>
+                        <td><strong>Nombre</strong></td>
+                        <td><strong>Numero de Cuenta</strong></td>
+                        <td><strong>Monto</strong></td>
+                    </tr>
+
+                    <tr>
+                        <td>Lucia</td>
+                        <td>13213213</td>
+                        <td>Q 30.2</td>
+
+
+                    </tr>
+
+                    <tr>
+                        <td>Byron</td>
+                        <td>33665411</td>
+                        <td>Q 6985.36</td>
+
+
+                    </tr>
+
+                    <tr>
+                        <td>Jose</td>
+                        <td>00020122</td>
+                        <td>Q 200.3</td>
+
+
+                    </tr>
+                </table>
+            </article>
+        </div>
+        <div class="item1">
+            <article class="bz" style="background-color:white; border-right:2px;">
+                <h2>Pago de Prestamos</h2>
+                <table border="1" style="border-color:black; border-style:groove;">
+                    <tr>
+                        <td><strong>Nombre</strong></td>
+                        <td><strong>Numero de Cuenta</strong></td>
+                        <td><strong>Monto</strong></td>
+                    </tr>
+
+                    <tr>
+                        <td>Lucia</td>
+                        <td>13213213</td>
+                        <td>Q 30.2</td>
+
+
+                    </tr>
+
+                    <tr>
+                        <td>Byron</td>
+                        <td>33665411</td>
+                        <td>Q 6985.36</td>
+
+
+                    </tr>
+
+                    <tr>
+                        <td>Jose</td>
+                        <td>00020122</td>
+                        <td>Q 200.3</td>
+
+
+                    </tr>
+                </table>
+            </article>
+        </div>
+        <div class="item1">
+            <article class="bz" style="background-color:white; border-left:2px;">
+                <h2>Otros Servicios</h2>
+                <table border="1" style="border-color:black; border-style:groove;">
+                    <tr>
+                        <td><strong>Nombre</strong></td>
+                        <td><strong>Numero de Cuenta</strong></td>
+                        <td><strong>Monto</strong></td>
+                    </tr>
+
+                    <tr>
+                        <td>Lucia</td>
+                        <td>13213213</td>
+                        <td>Q 30.2</td>
+
+                        
+                    </tr>
+
+                    <tr>
+                        <td>Byron</td>
+                        <td>33665411</td>
+                        <td>Q 6985.36</td>
+
+                        
+                    </tr>
+
+                    <tr>
+                        <td>Jose</td>
+                        <td>00020122</td>
+                        <td>Q 200.3</td>
+
+
+                    </tr>
+                </table>
+            </article>
+        </div>
+    </div>
+</body>
+</html>

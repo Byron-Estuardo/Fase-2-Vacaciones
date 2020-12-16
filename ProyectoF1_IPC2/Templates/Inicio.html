@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{% static 'css/Pruebas.css' %}" />
+    <title>Inicio</title>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="dropdown">
+                <button class="dropbtn">
+                    Transacciónes
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="http://127.0.0.1:8000/Transacciones/EntreCuentas/">Transacciónes entre Cuentas Propias</a>
+                    <a href="http://127.0.0.1:8000/Transacciones/Terceros/">Transacciónes a Cuentas de Terceros</a>
+                </div>
+            </div>
+            <a href="http://127.0.0.1:8000/Pre-Autorizacion/">Pre-Autorización de Cheques</a>
+            <div class="dropdown">
+                <button class="dropbtn">
+                    Pagos
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="http://127.0.0.1:8000/Pagos/Servicios/">Pago de Servicios</a>
+                    <a href="http://127.0.0.1:8000/Pagos/PlantillasyProveedores/">Pago de Plantillas</a>
+                </div>
+            </div>
+            <a href="http://127.0.0.1:8000/Solicitud-Prestamos/">Solicitud de Prestamos</a>
+            <div class="dropdown">
+                <button class="dropbtn" id="Usuario">
+                    Usuario
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="http://127.0.0.1:8000/Usuario/">Estado de Cuenta</a>
+                    <a href="http://127.0.0.1:8000/Usuario/Suspender/">Suspender Cuenta</a>
+                    <a href="http://127.0.0.1:8000/Usuario/Reactivar/">Reactivar Cuenta</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="grid-container" style="grid-template-columns: 100%;">
+        <div class="item1" id="ima"><p class="text-center">Banco "El Ahorro"</p></div>
+    </div>
+</body>
+</html>
