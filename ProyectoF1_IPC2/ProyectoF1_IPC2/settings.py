@@ -73,15 +73,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'ProyectoF1_IPC2.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-#DATABASES = {
-#    'default': {
- #       'ENGINE': 'django.db.backends.sqlite3',
- #       'NAME': BASE_DIR / 'db.sqlite3',
-  #  }
-#}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Final', # dbname
+        'USER': 'root', # master username
+        'PASSWORD': 'byron14112305', # master password
+        'HOST': 'localhost', # Endpoint
+        'PORT': '3306',
+    }
+}
 
 
 # Password validation
