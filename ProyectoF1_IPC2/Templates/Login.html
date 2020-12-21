@@ -9,20 +9,18 @@
 </head>
 <body>
     <div class="box">
-        <form>
+        <form method="POST" action="/">
+            {% csrf_token  %}
             <span class="text-center">Inicio de Sesión</span>
             <div class="input-container">
-                <input type="text" required="" />
+                <input type="text" name="Ingreso" required="" />
                 <label>Numero de Cuenta</label>
             </div>
             <div class="input-container">
-                <input type="password" required="" />
+                <input type="password" name="Contraseña" required="" />
                 <label>Clave de Acceso</label>
             </div>
-            <div class="input-container">
-                <a href="http://127.0.0.1:8000/Registro/" style="color:blue">No posee una Cuenta?</a>
-            </div>
-            <button type="button" class="btn">Ingresar</button>
+            <button type="submit" class="btn">Ingresar</button>
         </form>
     </div>
 

@@ -1,9 +1,19 @@
-from django.http import HttpResponse
+from .forms import *
 from django.shortcuts import render
+import MySQLdb
+
+host = 'localhost'
+db_name = 'Proyecto'
+user = 'root'
+contra = '201113759'
+puerto = 3306
 
 # First view
 
 def Principal_view(Request):
+    print(Request.POST)
+    vars = Request.POST['Ingreso'] #obtener variables
+    print(vars)
     return render(Request,"Login.html")
 
 def Registro_view(Request):

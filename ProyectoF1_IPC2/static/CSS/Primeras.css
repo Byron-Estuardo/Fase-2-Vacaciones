@@ -30,7 +30,24 @@ body {
     padding: 80px 100px;
     padding-bottom: 30px;
 }
-
+input[type=text]{
+    border: 0;
+    border-bottom: 1px solid rgb(231, 76, 60);
+    background: transparent;
+    width: 100%;
+    padding: 8px 0 5px 0;
+    font-size: 16px;
+    color: maroon;
+}
+input[type=date]{
+    border: 0;
+    border-bottom: 1px solid rgb(231, 76, 60);
+    background: transparent;
+    width: 100%;
+    padding: 8px 0 5px 0;
+    font-size: 16px;
+    color: maroon;
+}
 .input-container {
     position: relative;
     margin-bottom: 20px;
