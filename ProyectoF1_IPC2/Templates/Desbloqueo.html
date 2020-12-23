@@ -1,11 +1,60 @@
 ﻿<!DOCTYPE html>
-
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
+{% load static %}
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="{% static 'css/fin.css' %}" />
+    <title>Registro del Cliente</title>
 </head>
 <body>
+    <header>
+        <div class="navbar">
+            <div class="dropdown">
+                <button class="dropbtn">
+                    Registrar Cliente
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="http://127.0.0.1:8000/a/Cliente/Individual/">Registrar Cliente Individual</a>
+                    <a href="http://127.0.0.1:8000/a/Cliente/Empresarial/">Registrar Cliente Empresarial</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">
+                    Crear Cuentas
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="http://127.0.0.1:8000/a/Cuenta/Monetaria/">Cuenta Monetaria</a>
+                    <a href="http://127.0.0.1:8000/a/Cuenta/Ahorro/">Cuenta de Ahorro</a>
+                    <a href="http://127.0.0.1:8000/a/Cuenta/PlazoFijo/">Cuenta de Plazo Fijo</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">
+                    Cheques
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="http://127.0.0.1:8000/a/Crear/Chequera/">Crear Chequera</a>
+                    <a href="http://127.0.0.1:8000/a/Cobrar/Cheque/">Cobrar Cheque</a>
+                </div>
+            </div>
+            <a href="http://127.0.0.1:8000/a/Deposito/">Depositos</a>
+            <a href="http://127.0.0.1:8000/a/Desbloqueo/">Desbloqueo de Cuentas</a>
+        </div>
+
+    </header>
+
+    <div class="box">
+        <form method="POST">
+            <span class="text-center">Crear Chequera</span>
+            {{ form.as_p }}
+            {% csrf_token %}
+            <button type="submit" class="btn">Crear</button>
+        </form>
+    </div>
 
 </body>
 </html>

@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'ProyectoF1_IPC2.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'proyecto4', # dbname
+        'NAME': 'xd', # dbname
         'USER': 'root', # master username
         'PASSWORD': 'byron14112305', # master password
         'HOST': 'localhost', # Endpoint

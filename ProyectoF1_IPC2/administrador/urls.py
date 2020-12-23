@@ -21,7 +21,11 @@ urlpatterns = [
     path('IAdmin/', views.inicioAdmin),
     path('Cliente/Individual/', views.RegIndividual),
     path('Cliente/Empresarial/', views.RegEmpresarial),
-    path('CrearCuenta/', views.CrearCuenta),
+    path('Cuenta/Monetaria/', views.CuentaM),
+    path('Cuenta/Ahorro/', views.CuentaA),
+    path('Cuenta/PlazoFijo/', views.CuentaPF),
+    path('Crear/Chequera/', views.CrearChequera),
+    path('Cobrar/Cheque/', views.Cobrar),
     path('Deposito/', views.Depositos),
     path('Desbloqueo/', views.Desbloqueo)
 ]

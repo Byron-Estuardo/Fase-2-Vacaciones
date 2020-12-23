@@ -5,7 +5,7 @@ from django.db import connection
 import MySQLdb
 
 host = 'localhost'
-db_name = 'proyecto3'
+db_name = 'xd'
 user = 'root'
 contra = 'byron14112305'
 puerto = 3306
