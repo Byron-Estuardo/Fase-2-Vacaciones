@@ -18,7 +18,7 @@ class ClienteEmpresarial(forms.Form):
     ubicacion = forms.CharField(max_length=100, label='Ubicacion')
     ntelefono = forms.CharField(max_length=100, label='Numero Telefonico', widget=forms.NumberInput)
     tipoempresa = forms.CharField(max_length=100, label='Tipo de Empresa')
-    codigoingreo = forms.CharField(max_length=100, label='Nombre de Usuario', widget=forms.TextInput)
+    codigoingreso = forms.CharField(max_length=100, label='Nombre de Usuario', widget=forms.TextInput)
     clavea = forms.CharField(max_length=100, label='Contraseña', widget=PasswordInput)
 
 class ClienteIn(forms.Form):

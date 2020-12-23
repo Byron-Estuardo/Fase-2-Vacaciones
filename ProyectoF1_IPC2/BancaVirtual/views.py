@@ -12,6 +12,11 @@ puerto = 3306
 idClienteIngresado = ''
 # First view
 
+db = MySQLdb.connect(host=host,
+                                 user=user,
+                                 password=contra,
+                                 db=db_name)
+
 def Principal_view(request):
     form = InicioSesion1()
     variables = {
@@ -25,10 +30,6 @@ def Principal_view(request):
             clave = datos.get("clavea")
             print(usuario)
             print(clave)
-            db = MySQLdb.connect(host=host,
-                                 user=user,
-                                 password=contra,
-                                 db=db_name)
             cur = db.cursor()
             consulta2 = "select idCliente from Cliente where CodigoIngreso = '" + usuario + "' and ClaveA = '" + clave + "'"
             cur.execute(consulta2)

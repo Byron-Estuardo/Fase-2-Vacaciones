@@ -84,18 +84,18 @@ body {
     display: block;
 }
 
-label{
-
+label {
 }
 
 .box {
     position: absolute;
     left: 50%;
-    top: 90%;
+    top: 70%;
     transform: translate(-50%,-50%);
     background-color: rgba(147, 104, 0, 0.89);
     border-radius: 15px;
-    padding: 200px 100px;
+    padding: initial;
+    padding: 80px 100px;
     padding-bottom: 30px;
 }
 
