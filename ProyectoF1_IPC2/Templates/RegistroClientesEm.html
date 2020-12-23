@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="{% static 'css/new.css' %}" />
+    <title>Registro del Cliente</title>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="dropdown">
+                <button class="dropbtn">
+                    Registrar Cliente
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="http://127.0.0.1:8000/a/Cliente/Individual/">Registrar Cliente Individual</a>
+                    <a href="http://127.0.0.1:8000/a/Cliente/Empresarial/">Registrar Cliente Empresarial</a>
+                </div>
+            </div>
+            <a href="http://127.0.0.1:8000/CrearCuenta/">Crear Cuenta</a>
+            <div class="dropdown">
+                <button class="dropbtn">
+                    Cheques
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="http://127.0.0.1:8000/Pagos/Servicios/">Crear Chequera</a>
+                    <a href="http://127.0.0.1:8000/Pagos/PlantillasyProveedores/">Cobrar Cheque</a>
+                </div>
+            </div>
+            <a href="http://127.0.0.1:8000/Deposito/">Depositos</a>
+            <a href="http://127.0.0.1:8000/Desbloqueo/">Desbloqueo de Cuentas</a>
+        </div>
+        
+    </header>
+    <div class="box">
+        <form method="POST">
+            <span class="text-center">Registro de Cliente Empresarial</span>
+            {{ form.as_p }}
+            {% csrf_token %}
+            <button type="submit" class="btn">Registrar</button>
+        </form>
+    </div>
+
+</body>
+</html>

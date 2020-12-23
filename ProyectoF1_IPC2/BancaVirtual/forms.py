@@ -1,18 +1,38 @@
 from django import forms
+from django.forms import PasswordInput, TextInput
 from .models import *
 
-class Cliente(forms.ModelForm):
-    codigoingreso = models.IntegerField(db_column='CodigoIngreso')  # Field name made lowercase.
-    clavea = models.CharField(db_column='ClaveA', max_length=50)  # Field name made lowercase.
-    tipo_usuario = models.CharField(max_length=20)
+class InicioSesion1(forms.Form):
+    codigoingreso = forms.CharField(max_length=100, required=True, label='Usuario')
+    clavea = forms.CharField(max_length=100, label='Contraseña', widget=PasswordInput)
     class Meta:
-        managed = False
-        db_table = 'cliente'
-        unique_together = (('idcliente', 'codigoingreso'),)
+        fields = ["codigoingreso","clavea"]
+        labels = {
+            'codigoingreso': 'Usuario Administrador',
+            'clavea': 'Contraseña'
+        }
+
+class InicioSesion(forms.ModelForm):
+    class Meta:
+        model = Cliente
+        fields = ["codigoingreso", "clavea"]
+        labels = {
+            'codigoingreso': 'Usuario Administrador',
+            'clavea': 'Contraseña'
+        }
+        widgets = {
+            "clavea": PasswordInput()
+        }
 
 
-class InicioSesion(forms.Form):
-    idproducto = forms.IntegerField(required = True, help_text='Campo numerico, ingrese solo digitos')
-    nombre = forms.CharField(max_length=50, help_text='Nombre del producto',required = True)
+class InicioSesionA(forms.ModelForm):
     class Meta:
-        fields = ("idproducto","nombre")
+        model = Cliente
+        fields = ["codigoingreso", "clavea"]
+        labels = {
+            'codigoingreso': 'Usuario Administrador',
+            'clavea': 'Contraseña'
+        }
+        widgets = {
+            "clavea": PasswordInput()
+        }

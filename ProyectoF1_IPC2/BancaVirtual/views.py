@@ -1,26 +1,79 @@
 from .forms import *
 from django.shortcuts import render
+from .forms import *
+from django.db import connection
 import MySQLdb
 
 host = 'localhost'
-db_name = 'Proyecto'
+db_name = 'proyecto3'
 user = 'root'
-contra = '201113759'
+contra = 'byron14112305'
 puerto = 3306
-
+idClienteIngresado = ''
 # First view
 
-def Principal_view(Request):
-    print(Request.POST)
-    vars = Request.POST['Ingreso'] #obtener variables
-    print(vars)
-    return render(Request,"Login.html")
+def Principal_view(request):
+    form = InicioSesion1()
+    variables = {
+        "form": form
+    }
+    if request.method == "POST":
+        form = InicioSesion1(data=request.POST)
+        if form.is_valid():
+            datos = form.cleaned_data
+            usuario = datos.get("codigoingreso")
+            clave = datos.get("clavea")
+            print(usuario)
+            print(clave)
+            db = MySQLdb.connect(host=host,
+                                 user=user,
+                                 password=contra,
+                                 db=db_name)
+            cur = db.cursor()
+            consulta2 = "select idCliente from Cliente where CodigoIngreso = '" + usuario + "' and ClaveA = '" + clave + "'"
+            cur.execute(consulta2)
+            row = cur.fetchone()
+            if row is not None:
+                idClienteIngresado = row[0]
+                print(idClienteIngresado)
+                return render(request, "Inicio.html", variables)
+            else:
+                print('no jalo')
+                return render(request, "Login.html", variables)
+            db.close()
+            form = InicioSesion()
+            variables = {
+                "form": form
+            }
+            return render(request, "Inicio.html", variables)
+        else:
+            form.clean()
+            variables = {
+                "form": form.full_clean()
+            }
+    return render(request, "Login.html", variables)
 
-def Registro_view(Request):
-    return render(Request,"RegistroClientes.html")
 
-def Inicio_view(Request):
-    return render(Request,"Inicio.html")
+
+
+def Inicio_view(request):
+    form = InicioSesion()
+    variables = {
+        "form": form
+    }
+    if request.method == "POST":
+        form = InicioSesion(data=request.POST)
+        if form.is_valid():
+            datos = form.cleaned_data
+            usuario = datos.get("codigoingreso")
+            clave = datos.get("clavea")
+            print(usuario)
+            print(clave)
+        else:
+            variables = {
+                "form": form
+            }
+    return render(request, "Login.html", variables)
 
 def TCP_view(Request):
     return render(Request,"TCP.html")

@@ -19,7 +19,6 @@ from . import views
 
 urlpatterns = [
     path('', views.Principal_view),
-    path('Registro/', views.Registro_view),
     path('Inicio/', views.Inicio_view),
     path('Transacciones/EntreCuentas/', views.TCP_view),
     path('Transacciones/Terceros/', views.TCT_view),

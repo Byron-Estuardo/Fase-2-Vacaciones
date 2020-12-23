@@ -1,8 +1,8 @@
 ﻿* {
     font-family: 'Comic Sans MS';
 }
+
 body {
-    background-image: url('../Images/Fondo.png');
     background-color: black;
     background-position: center;
     background-origin: content-box;
@@ -11,6 +11,7 @@ body {
     min-height: 100vh;
     font-family: 'Comic Sans MS';
 }
+
 .text-center {
     color: maroon;
     text-transform: uppercase;
@@ -81,18 +82,22 @@ body {
     display: block;
 }
 
+label{
+
+}
 
 .box {
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 70%;
     transform: translate(-50%,-50%);
     background-color: rgba(147, 104, 0, 0.89);
     border-radius: 15px;
     padding: 80px 100px;
     padding-bottom: 30px;
 }
-input[type=text]{
+
+input[type=text] {
     border: 0;
     border-bottom: 1px solid rgb(231, 76, 60);
     background: transparent;
@@ -101,7 +106,8 @@ input[type=text]{
     font-size: 16px;
     color: maroon;
 }
-input[type=date]{
+
+input[type=date] {
     border: 0;
     border-bottom: 1px solid rgb(231, 76, 60);
     background: transparent;
@@ -161,6 +167,15 @@ input[type=number] {
     color: maroon;
 }
 
+input[type=number] {
+    border: 0;
+    border-bottom: 1px solid rgb(231, 76, 60);
+    background: transparent;
+    width: 100%;
+    padding: 8px 0 5px 0;
+    font-size: 16px;
+    color: maroon;
+}
 
 .input-container {
     position: relative;

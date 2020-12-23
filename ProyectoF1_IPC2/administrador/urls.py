@@ -18,16 +18,10 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('InitAdmin', views.Principal_view),
-    path('Registro/', views.Registro_view),
-    path('Inicio/', views.Inicio_view),
-    path('Transacciones/EntreCuentas/', views.TCP_view),
-    path('Transacciones/Terceros/', views.TCT_view),
-    path('Pre-Autorizacion/', views.Pre_view),
-    path('Pagos/Servicios/', views.PS_view),
-    path('Pagos/PlantillasyProveedores/', views.PP_view),
-    path('Solicitud-Prestamos/', views.SPresta_view),
-    path('Usuario/', views.Usuario_view),
-    path('Usuario/Suspender/', views.Suspender_view),
-    path('Usuario/Reactivar/', views.Reactivar_view)
+    path('IAdmin/', views.inicioAdmin),
+    path('Cliente/Individual/', views.RegIndividual),
+    path('Cliente/Empresarial/', views.RegEmpresarial),
+    path('CrearCuenta/', views.CrearCuenta),
+    path('Deposito/', views.Depositos),
+    path('Desbloqueo/', views.Desbloqueo)
 ]

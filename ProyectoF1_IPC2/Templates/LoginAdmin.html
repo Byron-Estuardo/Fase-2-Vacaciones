@@ -8,13 +8,12 @@
     <title>Login</title>
 </head>
 <body>
-    
     <div class="box">
-        <form method="Post">
+        <form method="POST">
             <span class="text-center">Inicio de Sesión</span>
             {{ form.as_p }}
             {% csrf_token %}
-            <button id="btn" class="btn" type="submit">Ingresar</button>
+            <button type="submit" class="btn">Ingresar</button>
         </form>
     </div>
 

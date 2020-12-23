@@ -19,5 +19,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('', include('BancaVirtual.urls')),
+    path('a/', include('administrador.urls')),
     path('admin/', admin.site.urls),
 ]

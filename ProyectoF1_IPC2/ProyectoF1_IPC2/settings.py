@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'BancaVirtual',
+    'administrador',
 ]
 
 MIDDLEWARE = [
@@ -76,7 +77,7 @@ WSGI_APPLICATION = 'ProyectoF1_IPC2.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Final', # dbname
+        'NAME': 'proyecto4', # dbname
         'USER': 'root', # master username
         'PASSWORD': 'byron14112305', # master password
         'HOST': 'localhost', # Endpoint
