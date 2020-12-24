@@ -26,6 +26,6 @@ urlpatterns = [
     path('Cuenta/PlazoFijo/', views.CuentaPF),
     path('Crear/Chequera/', views.CrearChequera),
     path('Cobrar/Cheque/', views.Cobrar),
-    path('Deposito/', views.Depositos),
+    path('Deposito/', views.Depositoss),
     path('Desbloqueo/', views.Desbloqueo)
 ]

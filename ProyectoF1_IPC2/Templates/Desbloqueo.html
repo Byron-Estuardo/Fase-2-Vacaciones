@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="{% static 'css/fin.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/todos.css' %}" />
     <title>Registro del Cliente</title>
 </head>
 <body>
@@ -49,10 +49,10 @@
 
     <div class="box">
         <form method="POST">
-            <span class="text-center">Crear Chequera</span>
+            <span class="text-center">Desbloquear Cuentas</span>
             {{ form.as_p }}
             {% csrf_token %}
-            <button type="submit" class="btn">Crear</button>
+            <button type="submit" class="btn">Desbloquear Cuenta</button>
         </form>
     </div>
 

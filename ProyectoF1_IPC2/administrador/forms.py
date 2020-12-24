@@ -83,6 +83,7 @@ class CrearCuentaAho(forms.Form):
     preauto = forms.CharField(widget=forms.Select(choices=elecciones1), label='Pre-Autorizacion')
     interes = forms.CharField(max_length=100, label='Interes', widget=forms.TextInput)
 
+
 class CrearCuentaPF(forms.Form):
     quet = 'Q'
     dol = '$'
@@ -114,3 +115,18 @@ class CrearCuentaPF(forms.Form):
 class Chequera(forms.Form):
     cuentas = forms.ChoiceField(widget=forms.Select(), choices=[], label='Cliente')
 
+
+class Depositos(forms.Form):
+    quet = 'Q'
+    dol = '$'
+    elecciones = ((quet, 'Q'),
+                  (dol, '$'))
+
+    moneda = forms.CharField(widget=forms.Select(choices=elecciones), label='Tipo de Moneda')
+    monto = forms.FloatField(max_value=10000, label='Monto a Depositar')
+    Descripcion = forms.CharField(widget=forms.TextInput, label='Descripcion')
+    cuentas = forms.ChoiceField(widget=forms.Select(), choices=[], label='Cuenta a Depositar')
+
+
+class Desbloqueos(forms.Form):
+    cuentas = forms.ChoiceField(widget=forms.Select(), choices=[], label='Cuentas Bloqueadas')

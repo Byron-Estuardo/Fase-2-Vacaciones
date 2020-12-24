@@ -1,10 +1,11 @@
+import random
+import string
 import MySQLdb
 from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
 from django.db import connection
 from .forms import *
-import random
-import string
+
 
 host = 'localhost'
 db_name = 'xd'
@@ -12,14 +13,15 @@ user = 'root'
 contra = 'byron14112305'
 puerto = 3306
 idClienteIngresado = ''
-# First view
-
-
-db = MySQLdb.connect(host=host,
-                     user=user,
-                     password=contra,
-                     db=db_name)
+# Conexion base de datos
+db = MySQLdb.connect(
+    host=host,
+    user=user,
+    password=contra,
+    db=db_name
+              )
 # Create your views here.
+
 
 def inicioAdmin(request):
     form = InicioSesion1()
@@ -29,6 +31,7 @@ def inicioAdmin(request):
     if request.method == "POST":
         form = InicioSesion1(data=request.POST)
         if form.is_valid():
+
             datos = form.cleaned_data
             usuario = datos.get("codigoingreso")
             clave = datos.get("clavea")
@@ -60,6 +63,7 @@ def inicioAdmin(request):
             }
 
     return render(request, "LoginAdmin.html", variables)
+
 
 def RegIndividual(request):
     print(idClienteIngresado)
@@ -102,7 +106,7 @@ def RegIndividual(request):
                 #Tercer consulta
                 cur1 = db.cursor()
                 data = [us, con, 'Individual', val]
-                consulta9 = "insert into Cliente(CodigoIngreso,ClaveA, tipo_usuario, IdClienteIn) values ('"+str(us)+"' , '"+str(con)+"', 'Individual' , "+ str(val) +")"
+                consulta9 = "insert into Cliente(CodigoIngreso,ClaveA, tipo_usuario, IdClienteIn, Estado) values ('"+str(us)+"' , '"+str(con)+"', 'Individual' , "+ str(val) +", 'Activo')"
                 cur1.execute(consulta9)
                 db.commit()
                 cur1.close()
@@ -128,6 +132,7 @@ def RegIndividual(request):
             }
 
     return render(request, 'RegistroClientesIn.html', variables)
+
 
 def RegEmpresarial(request):
     print(idClienteIngresado)
@@ -177,7 +182,7 @@ def RegEmpresarial(request):
                 print(us)
                 print(type(con))
                 print(type(val))
-                consulta9 = "insert into Cliente(CodigoIngreso,ClaveA, tipo_usuario, IdClienteEm) values ('" + str(us) + "' , '" + str(con) + "', 'Empresarial' , " + str(val) + ")"
+                consulta9 = "insert into Cliente(CodigoIngreso,ClaveA, tipo_usuario, IdClienteEm, Estado) values ('" + str(us) + "' , '" + str(con) + "', 'Empresarial' , " + str(val) + ", 'Activo')"
                 cur1.execute(consulta9)
                 db.commit()
                 # row = cur.fetchone()
@@ -206,6 +211,7 @@ def RegEmpresarial(request):
             }
 
     return render(request, 'RegistroClientesEm.html', variables)
+
 
 def CuentaM(request):
     # Obtener el idCliente General
@@ -270,6 +276,7 @@ def CuentaM(request):
             }
 
     return render(request, 'CuentaMonetaria.html', variables)
+
 
 def CuentaA(request):
     # Obtener el idCliente General
@@ -336,6 +343,7 @@ def CuentaA(request):
             }
 
     return render(request, 'CuentaAhorro.html', variables)
+
 
 def CuentaPF(request):
     # Obtener el idCliente General
@@ -404,6 +412,7 @@ def CuentaPF(request):
 
     return render(request, 'CuentaPlazo.html', variables)
 
+
 def CrearChequera(request):
     # Obtener el idCliente General
     curId = db.cursor()
@@ -456,6 +465,7 @@ def CrearChequera(request):
             curCI.execute(consul)
             row = curCI.fetchone()
             val = row[0]
+            curCI.close()
             #Actualizar Cuenta
             cur2 = db.cursor()
             consulta3 = "update Cuenta set CodigoChe = "+cuentas+" where CodigoCuenta = "+val+""
@@ -477,24 +487,321 @@ def CrearChequera(request):
     return render(request, 'CrearCh.html', variables)
 
 
+def Depositoss(request):
+    # Obtener el idCliente General
+    curId = db.cursor()
+    consulta26 = "select CodigoCuenta from Cuenta where Estado = 'Activo'"
+    curId.execute(consulta26)
+    listId = []
+    for i in curId:
+        for k in i:
+            listId.append(k)
+    curId.close()
+    # Obtener el codigo de Ingreso
+    curCI = db.cursor()
+    consul = "select CodigoCuenta from Cuenta where Estado = 'Activo'"
+    curCI.execute(consul)
+    listCI = []
+    for i in curCI:
+        for k in i:
+            listCI.append(k)
+    curCI.close()
 
+    d = dict(zip(listId, listCI))
+
+    list2 = [(0, 'Seleccione una Opcion')]
+    for a in d:
+        list2.append((a, d[a]))
+    print(list2)
+    form = Depositos()
+    form.fields['cuentas'].choices = list2
+    print(form.fields['cuentas'].choices)
+    variables = {
+        "form": form
+    }
+    if request.method == "POST":
+        form = Depositos(data=request.POST)
+        print(form.data)
+
+        if form.is_valid():
+            datos = form.cleaned_data
+            monto = datos.get("monto")
+            descrip = datos.get("Descripcion")
+            cuentas = datos.get("cuentas")
+            monedas = datos.get("moneda")
+            dolaraquetzal = 7.60
+            quetzaladolar = 7.87
+
+            # Seleccionar Tipo de Moneda
+            cursor = db.cursor()
+            c = "select TipoMoneda from Cuenta where CodigoCuenta = " + cuentas + ""
+            cursor.execute(c)
+            row = cursor.fetchone()
+            moneda = row[0]
+            cursor.close()
+
+            # Seleccionar saldo de cuenta
+            cursor = db.cursor()
+            c = "select TipoCuenta from Cuenta where CodigoCuenta = " + cuentas + ""
+            cursor.execute(c)
+            row = cursor.fetchone()
+            tipo = row[0]
+            cursor.close()
+            if tipo == 'Monetaria':
+                print(cuentas)
+                # Primer insert
+                cur = db.cursor()
+                consulta2 = "insert into Deposito (monto, Descripcion, CodigoCuenta) values (" + monto + ", '" + descrip + "' , " + cuentas + ")"
+                cur.execute(consulta2)
+                db.commit()
+                cur.close()
+                # Seleccionar saldo de cuenta
+                curCI = db.cursor()
+                consul = "select saldo from Cuenta where CodigoCuenta = " + cuentas + ""
+                curCI.execute(consul)
+                row = curCI.fetchone()
+                val = row[0]
+                if moneda == monedas:
+                    agregarSaldo = float(val) + float(monto)
+                    print('Q')
+                elif monedas == 'Q' and moneda == '$':
+                    conver = float(monto) * quetzaladolar
+                    agregarSaldo = float(val) + conver
+                    print('$')
+                elif monedas == '$' and moneda == 'Q':
+                    conver = float(monto) * dolaraquetzal
+                    agregarSaldo = float(val) + conver
+                    print('$')
+                curCI.close()
+                # Actualizar Cuenta
+                cur2 = db.cursor()
+                consulta3 = "update Cuenta set saldo = " + agregarSaldo + " where CodigoCuenta = " + cuentas + ""
+                cur2.execute(consulta3)
+                db.commit()
+                cur2.close()
+                form = Depositos()
+                form.fields['cuentas'].choices = list2
+                variables = {
+                    "form": form
+                }
+                return render(request, 'InicioAdmin.html', variables)
+            elif tipo == 'Plazo Fijo':
+                print(cuentas)
+                #Primer Deposito
+                # Primer insert
+                cur = db.cursor()
+                consulta2 = "insert into Deposito (monto, Descripcion, CodigoCuenta) values (" + monto + ", '" + descrip + "' , " + cuentas + ")"
+                cur.execute(consulta2)
+                db.commit()
+                cur.close()
+                # Seleccionar saldo de cuenta
+                curCI = db.cursor()
+                consul = "select saldo from Cuenta where CodigoCuenta = " + cuentas + ""
+                curCI.execute(consul)
+                row = curCI.fetchone()
+                val = row[0]
+                if moneda == monedas:
+                    agregarSaldo = float(val) + float(monto)
+                    print('Q')
+                elif monedas == 'Q' and moneda == '$':
+                    conver = float(monto) * quetzaladolar
+                    agregarSaldo = float(val) + conver
+                    print('$')
+                elif monedas == '$' and moneda == 'Q':
+                    conver = float(monto) * dolaraquetzal
+                    agregarSaldo = float(val) + conver
+                    print('$')
+                curCI.close()
+                cur2 = db.cursor()
+                # Actualizar Cuenta
+                consulta3 = "update Cuenta set saldo = " + agregarSaldo + " where CodigoCuenta = " + cuentas + ""
+                cur2.execute(consulta3)
+                db.commit()
+                cur2.close()
+
+                # Obtener Interes
+                curCI = db.cursor()
+                consul = "select Interes from Cuenta where CodigoCuenta = " + cuentas + ""
+                curCI.execute(consul)
+                row = curCI.fetchone()
+                I = row[0]
+                curCI.close()
+
+                #Intereses
+                # Primer insert
+                interes = float(conver) * float(I)
+                cur = db.cursor()
+                consulta2 = "insert into Deposito (monto, Descripcion, CodigoCuenta) values (" + interes + ", 'Intereses' , " + cuentas + ")"
+                cur.execute(consulta2)
+                db.commit()
+                cur.close()
+                # Seleccionar saldo de cuenta
+                curCI = db.cursor()
+                consul = "select saldo from Cuenta where CodigoCuenta = " + cuentas + ""
+                curCI.execute(consul)
+                row = curCI.fetchone()
+                val = row[0]
+                agregarSaldo = float(val) + float(interes)
+                cur2 = db.cursor()
+                # Actualizar Cuenta
+                consulta3 = "update Cuenta set saldo = " + agregarSaldo + " where CodigoCuenta = " + cuentas + ""
+                cur2.execute(consulta3)
+                db.commit()
+                cur2.close()
+
+                form = Depositos()
+                form.fields['cuentas'].choices = list2
+                variables = {
+                    "form": form
+                }
+                return render(request, 'InicioAdmin.html', variables)
+            elif tipo == 'Ahorro':
+                print(cuentas)
+                # Primer Deposito
+                # Primer insert
+                cur = db.cursor()
+                consulta2 = "insert into Deposito (monto, Descripcion, CodigoCuenta) values (" + monto + ", '" + descrip + "' , " + cuentas + ")"
+                cur.execute(consulta2)
+                db.commit()
+                cur.close()
+                # Seleccionar saldo de cuenta
+                curCI = db.cursor()
+                consul = "select saldo from Cuenta where CodigoCuenta = " + cuentas + ""
+                curCI.execute(consul)
+                row = curCI.fetchone()
+                val = row[0]
+                if moneda == monedas:
+                    agregarSaldo = float(val) + float(monto)
+                    print('Q')
+                elif monedas == 'Q' and moneda == '$':
+                    conver = float(monto) * quetzaladolar
+                    agregarSaldo = float(val) + conver
+                    print('$')
+                elif monedas == '$' and moneda == 'Q':
+                    conver = float(monto) * dolaraquetzal
+                    agregarSaldo = float(val) + conver
+                    print('$')
+                curCI.close()
+                cur2 = db.cursor()
+                # Actualizar Cuenta
+                consulta3 = "update Cuenta set saldo = " + agregarSaldo + " where CodigoCuenta = " + cuentas + ""
+                cur2.execute(consulta3)
+                db.commit()
+                cur2.close()
+
+                # Obtener Interes
+                curCI = db.cursor()
+                consul = "select Interes from Cuenta where CodigoCuenta = " + cuentas + ""
+                curCI.execute(consul)
+                row = curCI.fetchone()
+                I = row[0]
+                curCI.close()
+
+                # Intereses
+                # Primer insert
+                interes = float(conver) * float(I)
+                cur = db.cursor()
+                consulta2 = "insert into Deposito (monto, Descripcion, CodigoCuenta) values (" + interes + ", 'Intereses' , " + cuentas + ")"
+                cur.execute(consulta2)
+                db.commit()
+                cur.close()
+                # Seleccionar saldo de cuenta
+                curCI = db.cursor()
+                consul = "select saldo from Cuenta where CodigoCuenta = " + cuentas + ""
+                curCI.execute(consul)
+                row = curCI.fetchone()
+                val = row[0]
+                agregarSaldo = float(val) + float(interes)
+                cur2 = db.cursor()
+                # Actualizar Cuenta
+                consulta3 = "update Cuenta set saldo = " + agregarSaldo + " where CodigoCuenta = " + cuentas + ""
+                cur2.execute(consulta3)
+                db.commit()
+                cur2.close()
+
+                form = Depositos()
+                form.fields['cuentas'].choices = list2
+                variables = {
+                    "form": form
+                }
+                return render(request, 'InicioAdmin.html', variables)
+        else:
+            form.fields['cuentas'].choices = list2
+            variables = {
+                "form": form
+            }
+    return render(request, 'Depositos.html', variables)
+
+
+def Desbloqueo(request):
+    # Obtener el idCliente General
+    curId = db.cursor()
+    consulta26 = "select idCliente from Cliente where Estado = 'Bloqueado'"
+    curId.execute(consulta26)
+    listId = []
+    for i in curId:
+        for k in i:
+            listId.append(k)
+    curId.close()
+    # Obtener el codigo de Ingreso
+    curCI = db.cursor()
+    consul = "select CodigoIngreso from Cliente where Estado = 'Bloqueado'"
+    curCI.execute(consul)
+    listCI = []
+    for i in curCI:
+        for k in i:
+            listCI.append(k)
+    curCI.close()
+
+    d = dict(zip(listId, listCI))
+
+    list2 = [(0, 'Seleccione una Opcion')]
+    for a in d:
+        list2.append((a, d[a]))
+    print(list2)
+
+    form = Desbloqueos()
+    form.fields['cuentas'].choices = list2
+    print(form.fields['cuentas'].choices)
+    variables = {
+        "form": form
+    }
+    if request.method == "POST":
+        form = Desbloqueos(data=request.POST)
+        print(form.data)
+
+        if form.is_valid():
+            def gencon(chars=string.ascii_letters + string.digits + string.punctuation):
+                return ''.join([random.choice(chars) for i in range(10)])
+            nuevacon = gencon()
+            datos = form.cleaned_data
+            cuentas = datos.get("cuentas")
+            print(cuentas)
+            # Primer Consulta
+            cur = db.cursor()
+            consulta2 = "update Cliente set ClaveA = '"+nuevacon+"', Estado = 'Activo' where idCliente = "+cuentas+""
+            cur.execute(consulta2)
+            db.commit()
+            cur.close()
+            form = Desbloqueos()
+            form.fields['cuentas'].choices = list2
+            variables = {
+                "form": form
+            }
+            return render(request, 'InicioAdmin.html', variables)
+        else:
+            form.fields['cuentas'].choices = list2
+            variables = {
+                "form": form
+            }
+
+    return render(request,"Desbloqueo.html", variables)
 
 
 def Cobrar(request):
+
     variables = {
 
     }
 
     return render(request, 'CrearCh.html', variables)
-
-def Depositos(request):
-
-    variables = {
-
-    }
-
-
-    return render(request, 'Depositos.html', variables)
-
-def Desbloqueo(Request):
-    return render(Request,"Desbloqueo.html")
