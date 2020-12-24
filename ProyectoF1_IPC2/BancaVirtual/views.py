@@ -65,14 +65,35 @@ def Inicio_view(request):
     if request.method == "POST":
         form = InicioSesion1(data=request.POST)
         if form.is_valid():
+
             datos = form.cleaned_data
             usuario = datos.get("codigoingreso")
             clave = datos.get("clavea")
-            print(usuario)
-            print(clave)
-        else:
+            cur = db.cursor()
+            consulta2 = "select idCliente, tipo_usuario from Cliente where CodigoIngreso = '" + usuario + "' and ClaveA = '" + clave + "'"
+            cur.execute(consulta2)
+            row = cur.fetchone()
+            if row is not None:
+                tipo = row[1]
+                if tipo != 'Administrador':
+
+                    return render(request, "Inicio.html", variables)
+                else:
+                    print('Wacho que no salio')
+                    return render(request, "Login.html", variables)
+            else:
+                print('no jalo')
+                return render(request, "Login.html", variables)
+            db.close()
+            form = InicioSesion()
             variables = {
                 "form": form
+            }
+            return render(request, "Inicio.html", variables)
+        else:
+            form.clean()
+            variables = {
+                "form": form.full_clean()
             }
     return render(request, "Login.html", variables)
 
@@ -97,8 +118,36 @@ def SPresta_view(Request):
 def Usuario_view(Request):
     return render(Request,"Usuario.html")
 
-def Suspender_view(Request):
-    return render(Request,"Susp.html")
+def Suspender_view(request):
+    # Obtener el idCliente General
+    curId = db.cursor()
+    consulta26 = "select Cuenta from Cliente where id = 'Bloqueado'"
+    curId.execute(consulta26)
+    listId = []
+    for i in curId:
+        for k in i:
+            listId.append(k)
+    curId.close()
 
-def Reactivar_view(Request):
-    return render(Request,"Reactivar.html")
+    variables = {
+        "listId": listId
+    }
+    if request.method == "POST":
+        cuentas = request.POST.get("cuenta")
+        print(cuentas)
+        # Primer Consulta
+        cur = db.cursor()
+        consulta2 = "update Cliente set ClaveA = '" + nuevacon + "', Estado = 'Activo' where idCliente = " + cuentas + ""
+        cur.execute(consulta2)
+        db.commit()
+        cur.close()
+        variables = {
+            "listId": listId
+        }
+        return render(request, 'InicioAdmin.html', variables)
+
+    return render(request, "Desbloqueo.html", variables)
+    return render(request,"Susp.html", variables)
+
+def Reactivar_view(request):
+    return render(request,"Reactivar.html")

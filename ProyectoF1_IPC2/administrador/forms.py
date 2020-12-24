@@ -17,7 +17,6 @@ db = MySQLdb.connect(host=host,
                      password=contra,
                      db=db_name)
 
-
 class InicioSesion1(forms.Form):
     codigoingreso = forms.CharField(max_length=100, required=True, label='Usuario Administrador',
                                     widget=forms.TextInput)
