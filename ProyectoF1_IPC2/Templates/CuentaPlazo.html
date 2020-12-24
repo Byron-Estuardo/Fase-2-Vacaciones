@@ -49,6 +49,12 @@
     <div class="box">
         <form method="POST">
             <span class="text-center">Cuenta de Plazo Fijo</span>
+            <label>Cliente</label>
+            <select name="cuenta">
+                {% for c in listId %}
+                <option value="{{c}}">{{c}}</option>
+                {%endfor%}
+            </select>
             {{ form.as_p }}
             {% csrf_token %}
             <button type="submit" class="btn">Crear</button>

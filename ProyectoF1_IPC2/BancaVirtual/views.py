@@ -58,12 +58,12 @@ def Principal_view(request):
 
 
 def Inicio_view(request):
-    form = InicioSesion()
+    form = InicioSesion1()
     variables = {
         "form": form
     }
     if request.method == "POST":
-        form = InicioSesion(data=request.POST)
+        form = InicioSesion1(data=request.POST)
         if form.is_valid():
             datos = form.cleaned_data
             usuario = datos.get("codigoingreso")

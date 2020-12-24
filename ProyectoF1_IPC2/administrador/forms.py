@@ -63,10 +63,8 @@ class CrearCuentaMo(forms.Form):
     no = 'No'
     elecciones1 = ((si, 'Si'),
                    (no, 'No'))
-    cuentas = forms.ChoiceField(widget=forms.Select(), choices=[], label='Cliente')
     moneda = forms.CharField(widget=forms.Select(choices=elecciones), label='Tipo de Moneda')
     preauto = forms.CharField(widget=forms.Select(choices=elecciones1), label='Pre-Autorizacion')
-
 
 class CrearCuentaAho(forms.Form):
     quet = 'Q'
@@ -78,7 +76,6 @@ class CrearCuentaAho(forms.Form):
     no = 'No'
     elecciones1 = ((si, 'Si'),
                    (no, 'No'))
-    cuentas = forms.ChoiceField(widget=forms.Select(), choices=[], label='Cliente')
     moneda = forms.CharField(widget=forms.Select(choices=elecciones), label='Tipo de Moneda')
     preauto = forms.CharField(widget=forms.Select(choices=elecciones1), label='Pre-Autorizacion')
     interes = forms.CharField(max_length=100, label='Interes', widget=forms.TextInput)
@@ -105,15 +102,10 @@ class CrearCuentaPF(forms.Form):
     (doce , 12),
     (dc , 24),
     (ts , 36))
-    cuentas = forms.ChoiceField(widget=forms.Select(), choices=[], label='Cliente')
     moneda = forms.CharField(widget=forms.Select(choices=elecciones), label='Tipo de Moneda')
     preauto = forms.CharField(widget=forms.Select(choices=elecciones1), label='Pre-Autorizacion')
     interes = forms.CharField(max_length=100, label='Interes (Porcentaje)', widget=forms.TextInput)
     tiempo = forms.CharField(widget=forms.Select(choices=elecciones2), label='Tiempo Definido (Meses)')
-
-
-class Chequera(forms.Form):
-    cuentas = forms.ChoiceField(widget=forms.Select(), choices=[], label='Cliente')
 
 
 class Depositos(forms.Form):
@@ -125,7 +117,6 @@ class Depositos(forms.Form):
     moneda = forms.CharField(widget=forms.Select(choices=elecciones), label='Tipo de Moneda')
     monto = forms.FloatField(max_value=10000, label='Monto a Depositar')
     Descripcion = forms.CharField(widget=forms.TextInput, label='Descripcion')
-    cuentas = forms.ChoiceField(widget=forms.Select(), choices=[], label='Cuenta a Depositar')
 
 
 class Desbloqueos(forms.Form):
